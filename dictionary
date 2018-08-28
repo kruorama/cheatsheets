@@ -1,0 +1,385 @@
+### Basics
+# + addition
+# - substraction
+# * multiplication
+# / division
+# ** exponent
+
+### Types
+
+print type(value)
+
+int #целое число
+long # длинное 
+float # десятичная дробь
+
+none # переменная
+
+str # строковое
+a.upper() # в верхний регистр
+a.lower() # в нижний регистр
+len(a) # длина строки
+bool(a) # проверка, пустая ли текстовая переменная
+
+## Store information¶
+### Lists 
+list = [] #create list:
+
+list.append(value) # add value to list
+list = [value1, value2] # create list with values
+
+list[0] # first value in the list
+list[0][0] # first value in first list in list
+len(list) # length of the list
+last_index = len(list) - 1 
+list[2:4] # selects items 2 and 3 (not 4!)
+list[-1] # select last item
+list [:5] # first 5 elements
+list [-5:] #last 5 elements
+ 
+del list[a] # delete item a in list
+
+split_list = data.split(",") #split by comma, to split by line break take "\n"
+
+mylist[:] = [not x for x in mylist] # revert boolean list
+
+### Dictionaries
+dictionary = {} # create empty dictionary
+
+dictionary["Label"] = 70 # assign value to label 
+
+dictionary["Label"] # call value by label
+
+# create dictionary with values
+dictionary = {
+    "Tom":60,
+    "Jim":70
+}
+
+dictionary.add (a) # add a name
+dictionary.remove (a) # remove
+
+# access both keys and values in a dictionary
+for fruit, rating in fruits.items():
+    print(rating)
+
+### Set
+# contains only unique values
+print(unique_animals)
+
+unique_animals.add("Tiger") # add item (will be ignored if it was there)
+unique_animals.remove("Dog") # remove item
+
+list(unique_animals) # convert to list
+
+### Range
+range(10) # list with elements 0-9
+xrange(10) # generator, doesn't store elements in memory until they're used
+
+for i in range(10):
+    print(i)
+
+for i in range(10):
+    print (i), # print in one row, works in Python2
+
+## Functions
+Open file
+
+f = open("test.csv", "r") # open file
+data = f.read() # read file
+Loops
+
+#split through loop
+final_dataset = []
+for row in split_list:
+    line = row.split(",")
+    final_dataset.append(line)
+
+#short version of a loop
+animal_lengths = []
+for animal in animals:
+    animal_lengths.append(len(animal))
+==
+animal_lengths = [len(animal) for animal in animals]
+
+# enumerate
+ships = ["Andrea Doria", "Titanic", "Lusitania"]
+cars = ["Ford Edsel", "Ford Pinto", "Yugo"]
+
+for i, ship in enumerate(ships): # index and value
+    print (ship) # print value
+    print (cars[i]) # print other list value with same index
+
+things = [["apple", "monkey"], ["orange", "dog"], ["banana", "cat"]]
+trees = ["cedar", "maple", "fig"]
+
+for i, thing in enumerate(things):
+    thing.append(trees[i]) # add corresponding value to each row
+
+# IF STATEMENTS
+
+bool # boolean value
+== != > < >= <=
+
+# & and
+# | or
+
+if a > 5:
+    print(a)
+    
+
+counter =0
+index = 0
+
+# Find the index of a value
+for city in cities:
+    if city = "Washington":
+        index = counter
+    counter += 1
+
+# print answer
+if "cat" in animals: 
+    print ("Cat found")
+    else:
+        print "Cat not found"
+
+cat_found = "cat" in animals # returns boolean value
+
+values = [-50, -80, -100]
+max_value = None #set to none so that there is no default value
+for i in values:
+    if max_value is None or i > max_value: # is None instead of == None (second will return True if not empty)
+        max_value = i
+
+Modules
+
+import my_module # import module
+a = my_module.function (b) # use a method in module
+import my_module as m # assign a short name 
+
+math # math module
+math.sqrt(a) # square root of a
+math.floor (a)  # floor
+math.ceil(a) # ceiling
+
+csv # csv module
+a = csv.reader(f)# read csv
+data = list (a) # convert to list
+
+from math import function1 # import 1 function
+from math import function1, function2 # import several
+from my_module import * # import all functions and objects to global namespace, usually a bad idea
+# functions will be not prefixed
+
+
+Classes
+
+class Dataset: # declarate class
+    def __init__ (self): # creates the new object
+        self.type = "csv" # sets "csv" to the .type
+        
+dataset = Dataset() # create new instance of Dataset class
+
+print (dataset.type) # print .type of dataset
+
+
+class Dataset:
+    # cut dataset to header and data
+    def __init__(self, data): # add attributes (here: data) dynamically
+        self.data = data # assign the input data to .data
+        self.header = self.data[0] # assign the header row to .header, 
+        self.data = self.data[1:] # assign the rest of the data to .data
+
+    # print first N rows
+    def print_data(self, num_rows): # define method that takes number of rows as argument
+        print(self.data [:num_rows]) # print what is stored in data between 0 and num_rows
+    
+    # find label in header and display its column
+    def column(self, label):
+        if label not in self.header:
+            return None
+        
+        column_data = []
+
+        for idx, value in enumerate(self.header): # creates index and value for every row of the list
+            if value == label: 
+                column_idx = idx # save the index
+        for i in self.data:
+            column_data.append(i[column_idx])
+        return column_data
+    
+    # count the number of unique values in column
+    def count_unique(self, label):
+        unique_results = set(self.column(label)) # set() creates a set (unindexable) with unique values from the list
+        count = len(unique_results) 
+        return count
+    
+    # change what happens when str is called (also format() and print() )
+    def __str__(self):
+        return str(self.data[:10])
+    # https://docs.python.org/3/reference/datamodel.html#basic-customization  
+    
+f = open ("nfl.csv", "r")
+csvreader = csv.reader(f)
+nfl_data = list(csvreader) # got a list from file
+
+nfl_dataset = Dataset(nfl_data) # create a Dataset object with a field data where the list is stored
+dataset_data = nfl_dataset.data # get what is stored in data field in this instance of Dataset
+nfl_dataset.print_data(5) # print first 5 rows
+year_column = nfl_dataset.column("year") # access data from column "year"
+total_years = nfl_dataset.count_unique("year") # access number of unique values in column "year"
+
+Errors
+
+# prevent code from stopping the execution if there's an error
+try:
+    int('')
+except Exception:
+    print("There was an error")
+    
+try:
+    int('')
+except Exception as exc: # assign the instance of the Exception class to the variable exc
+    print(type(exc))  # print the type of Exception that occured in the try statement body
+    
+try:
+    int('')
+except Exception:
+    pass # do nothing, continue
+Global variables
+
+# variables inside the functions are local. 
+# If it's not defined in function, Python will first look for global variables and then for built-in functions
+# local variables don't interfere with global ones and with those from other functions
+
+total = 10
+
+def add_to_total(a):
+    global total # make a variable global, send its value to the global one
+    total = total + a #first define the variable as global, then assign a value to it on a separate line.
+
+add_to_total(20)
+print(total)
+Regular expressions
+
+https://docs.python.org/3/library/re.html
+
+import re #import regular expressions module
+
+
+"." # any character
+"^a" # all strings that start with "a".
+"a$"# all strings that end with "a".
+"[bcr]at" # any symbol in square brackets fits
+"\" # escape special character
+
+print(r'C:\some\name') # note the r before the quote
+
+"|" # or operator for regular expressions
+"[0-9]" #any number
+"[0-9]{3}" # three times
+
+# search
+if re.search("needle", "haystack") is not None: # (regex, string) check if regex matches the string
+    print("We found it!")
+else:
+    print("Not a match")
+    
+    
+    
+# replace
+pattern: The regex to match
+repl: The string that should replace the substring matches
+string: The string containing the pattern we want to search
+    
+for row in posts:
+    row[0] = re.sub("[\[\(][Ss]erious[\]\)]", "[Serious]", row[0])
+
+#find
+findall() function that returns a list of substrings matching the regex.
+years = re.findall("[1-2][0-9]{3}", years_string)
+Time
+
+time.time() #current time in Unix format
+time.gmtime() # human-readable format, creates an object of struct_time class
+# https://docs.python.org/3/library/time.html#time.struct_time
+tm_year # The year of the timestamp
+tm_mon # The month of the timestamp (1-12)
+tm_mday # The day in the month of the timestamp (1-31)
+tm_hour # The hour of the timestamp (0-23)
+tm_min #The minute of the timestamp (0-59)
+
+current_time = time.time()
+current_struct_time = time.gmtime(current_time)
+current_year = current_struct_time.tm_year
+
+# DATETIME
+#create instance of datetime class
+nye_2017 = datetime.datetime(year=2017, month=12, day=31, hour=12, minute=59, second=59) 
+
+https://docs.python.org/3/library/datetime.html#datetime.datetime.year
+functions = [year, month, day, hour, minute, second, microsecond]
+    
+#current datetime:
+current_datetime = datetime.datetime.utcnow()
+
+# timedelta class
+functions = [weeks, days, hours, minutes, seconds, milliseconds, microseconds]
+
+diff = datetime.timedelta(weeks = 3, days = 2) # create the delta
+future = today + diff # calculate the result
+
+# .strftime() - convert datetime to readable str
+pretty_march3 = march3.strftime("%b %d, %Y") # pass format for the date string
+https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior
+    
+# datetime.datetime.strptime() - convert str to datetime
+march3 = datetime.datetime.strptime("Mar 03, 2010", "%b %d, %Y") # function, not a method of an object
+
+# datetime.datetime.fromtimestamp() - convert timestamp to datetime
+
+
+NumPy
+
+# NumPy
+import numpy as np
+vector = np.array([5, 10, 15, 20]) #create vector
+matrix = np.array([[5, 10, 15], [20, 25, 30], [35, 40, 45]]) #create matrix
+
+print(matrix.shape)#returns shape of the matrix (rows, columns and so on)
+
+matrix = np.genfromtxt("data.csv", delimiter=",") # import file
+matrix = np.genfromtxt("data.csv", dtype = "U75", delimiter=",",  skip_header=1) # import in unicode, no header
+
+https://docs.scipy.org/doc/numpy-1.10.0/reference/generated/numpy.genfromtxt.html
+
+# Slicing
+matrix[1,2] #select third element in second row
+matrix[:,1] # select entire second row
+matrix[:,0:2] # all rows, 2 first columns
+matrix[1:3,:] # rows 2-3, all columns
+
+# get only desired rows
+country_is_algeria = world_alcohol[:,2] == "Algeria" # get a boolean matrix
+country_algeria = world_alcohol[country_is_algeria, :] # use matrix to select strings
+
+# two parameters
+is_algeria_and_1986 = (world_alcohol[:,0] == "1986") & (world_alcohol[:,2] == "Algeria")
+rows_with_algeria_and_1986 = world_alcohol[is_algeria_and_1986, :]
+
+# replace stuff
+year_1986 = world_alcohol[:,0] == "1986"
+world_alcohol[year_1986,0] = "2014"
+
+# convert all data in other type 
+vector = vector.astype(float)
+
+# NumPy computations
+
+https://docs.scipy.org/doc/numpy-1.10.1/index.html
+
+matrix.sum(axis=1) # sum rows, for columns 0
+.mean() # average
+.max() # max value
+
+
