@@ -1,5 +1,3 @@
 # Dataquest cheatsheets
-This document lists Python features and small functions from a Dataquest course. It's not a program.
+This document lists Python features and small programs from a Dataquest course. They are learning reference and are not meant to do anything
 
-# How to run it
-You don't. It's copy-paste from Jupiter notebook, hence the format. 
