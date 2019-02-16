@@ -9,17 +9,12 @@
 
 print type(value)
 
-int #целое число
-long # длинное 
-float # десятичная дробь
-
-none # переменная
-
-str # строковое
-a.upper() # в верхний регистр
-a.lower() # в нижний регистр
-len(a) # длина строки
-bool(a) # проверка, пустая ли текстовая переменная
+int, float, long
+str # string
+a.upper() # в uppercase
+a.lower() # lowercase
+len(a) # string length
+bool(a) # check if a variable is empty
 
 ## Store information¶
 ### Lists 
